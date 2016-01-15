@@ -29,13 +29,13 @@ html{
 
 .barque img {
    
-    width:15%;
+    width:35%;
     height:15%;
     margin-left:15%;
     margin-top:10%;
 }
 .barque img:hover{
-    width:20%;
+    width:40%;
     height:20%;
     margin-left:10%;
     margin-top:10%;
@@ -73,4 +73,14 @@ html{
 .booster{
     
     margin-top:-100;
+}
+
+#moveDiv
+{
+
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	
+	transition: left 1s linear, right 1s linear;
 }
