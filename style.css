@@ -75,6 +75,11 @@ html{
     margin-top:-100;
 }
 
+.booster button{
+    
+   width:90%;
+}
+
 #moveDiv
 {
 
@@ -82,5 +87,5 @@ html{
 	top: 10px;
 	left: 10px;
 	
-	transition: left 1s linear, right 1s linear;
+	transition: left 5s linear, right 5s linear;
 }
