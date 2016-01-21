@@ -1,24 +1,36 @@
 $bouton = document.getElementById("bouton");
 $multiplicateur = document.getElementById("multiplicateur");
+$jackpot = document.getElementById("jackpot");
+$autoclic = document.getElementById("autoclic");
 $score = document.getElementById("score");
 score = 0;
 nbMultiplicateur = 1;
+nbJackpot =  1;
+nbAutoclic = 1;
 
 function afficherScore() {
   $score.innerHTML =  score;
 }
 
 function afficherNbMultiplicateur() {
-  $multiplicateur.innerHTML = "Poissons x" + nbMultiplicateur + " (prix prochain lvl : " + prix() + "P)";
+  $multiplicateur.innerHTML = "Poissons x" + nbMultiplicateur + " au clic</br> (prix prochain lvl : " + prix() + "P)";
+}
+
+function afficherJackpot() {
+  $jackpot.innerHTML = "Poissons 1+ +" + nbJackpot + " au clic</br> (prix prochain lvl : " + prixDeux() + "P)";
+}
+
+function afficherAutoclic() {
+  $autoclic.innerHTML = "Poissons +" + nbAutoclic + " par second</br> (prix prochain lvl : " + prixTrois() + "P)";
 }
 
 function clic() {
-  score = score + nbMultiplicateur;
+  score = score + nbMultiplicateur  + nbJackpot  ;
   afficherScore();
 }
 
 function prix() {
-  return 50 * nbMultiplicateur * nbMultiplicateur;
+  return 20 * nbMultiplicateur * nbMultiplicateur;
 }
 
 function acheterMultiplicateur() {
@@ -32,11 +44,45 @@ function acheterMultiplicateur() {
   }
 }
 
+function prixDeux() {
+  return 25 * nbJackpot ;
+}
+
+function acheterJackpot() {
+  if (score >= prixDeux()) {
+    score = score - prixDeux();
+    nbJackpot = nbJackpot + 1;
+     
+    afficherJackpot();
+    afficherScore();
+  } else {
+    alert("Pas assez de poisson pour acheter ce booster !");
+  }
+}
+
+function prixTrois() {
+  return 15 * nbAutoclic + nbAutoclic ;
+}
+
+
+function acheterAutoclic() {
+  if (score >= prixTrois()) {
+    score = score - prixTrois();
+     nbAutoclic = setTimeout(autoClic, 3600) + 1;
+   
+     
+   afficherAutoclic();
+    afficherScore();
+  } else {
+    alert("Pas assez de poisson pour acheter ce booster !");
+  }
+}
+
 
 function autoClic() {
-    if (score >= 200){
-        score = score + 1 ;
-        setTimeout(autoClic, 3000);
+    if (score){
+        score = score + nbAutoclic  ;
+        setTimeout(autoClic, 3600)
         
     afficherScore();
     
@@ -44,7 +90,7 @@ function autoClic() {
     }else {
   
   afficherScore();
-  setTimeout(autoClic, 3000);
+  
     }
    
 }
@@ -111,5 +157,9 @@ window.onload=function()
 
 $bouton.onclick = clic;
 $multiplicateur.onclick = acheterMultiplicateur;
+$jackpot.onclick = acheterJackpot;
+$autoclic.onclick = acheterAutoclic;
 afficherScore();
 afficherNbMultiplicateur();
+afficherJackpot();
+afficherAutoclic();
